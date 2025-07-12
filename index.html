@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IAxGO – Servicios Digitales al Instante</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom font for better aesthetics - Inter is a clean, modern choice */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #000000; /* Pure black background */
+            color: #e0e0e0; /* Light text for contrast */
+            overflow-x: hidden; /* Prevent horizontal scroll on small screens */
+        }
+
+        /* Custom neon glow effect for titles and accents */
+        .neon-blue-glow {
+            text-shadow: 0 0 8px rgba(0, 255, 255, 0.8), 0 0 15px rgba(0, 255, 255, 0.6), 0 0 25px rgba(0, 255, 255, 0.4);
+        }
+        .neon-fuchsia-glow {
+            text-shadow: 0 0 8px rgba(255, 0, 255, 0.8), 0 0 15px rgba(255, 0, 255, 0.6), 0 0 25px rgba(255, 0, 255, 0.4);
+        }
+        .neon-gold-glow {
+            text-shadow: 0 0 6px rgba(255, 215, 0, 0.8), 0 0 12px rgba(255, 215, 0, 0.6), 0 0 20px rgba(255, 215, 0, 0.4);
+        }
+
+        /* Subtle background pattern/texture for sections */
+        .section-bg-pattern {
+            background-image: radial-gradient(circle at 1% 1%, rgba(0, 255, 255, 0.03) 1px, transparent 1px),
+                              radial-gradient(circle at 99% 99%, rgba(255, 0, 255, 0.03) 1px, transparent 1px);
+            background-size: 250px 250px;
+        }
+
+        /* Style for list items to ensure proper spacing and alignment */
+        .service-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center; /* Align items vertically */
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08); /* Subtle separator */
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        .service-item:hover {
+            background-color: rgba(0, 255, 255, 0.05); /* Light blue hover effect */
+            transform: translateY(-2px);
+        }
+        .service-item:last-child {
+            border-bottom: none; /* No border on the last item */
+        }
+        .service-name {
+            flex-grow: 1; /* Allows name to take available space */
+            margin-right: 1rem; /* Space between name and price */
+            font-size: 1rem; /* Compact size */
+            font-weight: 500;
+        }
+        .service-price {
+            font-weight: bold;
+            color: #FFD700; /* Golden color for prices */
+            font-size: 1.05rem;
+            min-width: 60px; /* Ensure price column has consistent width */
+            text-align: right;
+        }
+
+        /* Concept Display Card */
+        #concept-display-card {
+            position: fixed;
+            bottom: 20px; /* Adjust as needed, above WhatsApp button */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 600px;
+            background-color: #1a1a1a; /* Darker background for the card */
+            border: 1px solid #00ffff; /* Neon blue border */
+            border-radius: 1rem;
+            padding: 1.5rem;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.4); /* Neon glow shadow */
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease-out, transform 0.4s ease-out, visibility 0.4s ease-out;
+            transform: translateX(-50%) translateY(20px); /* Initial hidden state */
+        }
+        #concept-display-card.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+        #concept-display-card .close-btn {
+            position: absolute;
+            top: 0.75rem;
+            right: 0.75rem;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.25rem;
+            line-height: 1;
+            transition: color 0.2s ease;
+        }
+        #concept-display-card .close-btn:hover {
+            color: #ff00ff; /* Fuchsia on hover */
+        }
+    </style>
+</head>
+<body class="flex flex-col items-center justify-start min-h-screen">
+    <div class="w-full max-w-2xl mx-auto p-4 md:p-8">
+        <!-- Hero Section -->
+        <header class="text-center py-12 md:py-16 bg-gradient-to-br from-gray-900 to-black rounded-b-3xl shadow-xl border-b-2 border-blue-700 mb-12">
+            <h1 class="text-5xl md:text-6xl font-extrabold text-white neon-blue-glow mb-4 leading-tight">
+                IAxGO – Servicios Digitales al Instante
+            </h1>
+            <p class="text-xl md:text-2xl font-semibold text-fuchsia-400 neon-fuchsia-glow mb-8">
+                IA, Streaming, Música y más desde solo <span class="neon-gold-glow">S/7</span>
+            </p>
+            <a href="https://wa.me/+51974530640" target="_blank" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full text-lg shadow-lg transform transition-transform duration-300 hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50">
+                Contáctanos por WhatsApp
+            </a>
+        </header>
+
+        <!-- Main Content Sections -->
+        <main class="space-y-12">
+            <!-- INTELIGENCIA ARTIFICIAL Section -->
+            <section class="bg-gray-900 rounded-xl p-6 md:p-8 border border-blue-800 shadow-lg section-bg-pattern">
+                <h2 class="text-3xl md:text-4xl font-bold text-blue-400 mb-6 border-b-2 border-blue-700 pb-3 flex items-center">
+                    <span class="mr-3 text-4xl">🤖</span> INTELIGENCIA ARTIFICIAL
+                </h2>
+                <ul class="divide-y divide-gray-800">
+                    <li class="service-item" data-name="ChatGPT Plus" data-price="S/15" data-concept="Versión avanzada del famoso asistente de IA, ideal para tareas, textos y códigos.">
+                        <span class="service-name">ChatGPT Plus</span> <span class="service-price">S/15</span>
+                    </li>
+                    <li class="service-item" data-name="CapCut Pro" data-price="S/11" data-concept="Editor de video con funciones premium, ideal para TikTok y Reels.">
+                        <span class="service-name">CapCut Pro</span> <span class="service-price">S/11</span>
+                    </li>
+                    <li class="service-item" data-name="Gemini IA" data-price="S/9" data-concept="IA de Google con integración a herramientas y excelente análisis.">
+                        <span class="service-name">Gemini IA</span> <span class="service-price">S/9</span>
+                    </li>
+                    <li class="service-item" data-name="Canva Pro" data-price="S/8" data-concept="Herramienta de diseño gráfico con plantillas, fondos y recursos premium.">
+                        <span class="service-name">Canva Pro</span> <span class="service-price">S/8</span>
+                    </li>
+                    <li class="service-item" data-name="Blackbox AI" data-price="S/12" data-concept="IA para programadores que sugiere código y explica errores.">
+                        <span class="service-name">Blackbox AI</span> <span class="service-price">S/12</span>
+                    </li>
+                    <li class="service-item" data-name="JarVIS IA" data-price="S/12" data-concept="Asistente completo para automatizar tareas y generar contenido.">
+                        <span class="service-name">JarVIS IA</span> <span class="service-price">S/12</span>
+                    </li>
+                </ul>
+            </section>
+
+            <!-- STREAMING Section -->
+            <section class="bg-gray-900 rounded-xl p-6 md:p-8 border border-fuchsia-800 shadow-lg section-bg-pattern">
+                <h2 class="text-3xl md:text-4xl font-bold text-fuchsia-400 mb-6 border-b-2 border-fuchsia-700 pb-3 flex items-center">
+                    <span class="mr-3 text-4xl">🎬</span> STREAMING – 1 MES
+                </h2>
+                <ul class="divide-y divide-gray-800">
+                    <li class="service-item" data-name="Netflix Genérico" data-price="S/10" data-concept="Plan básico para ver en un dispositivo.">
+                        <span class="service-name">Netflix Genérico</span> <span class="service-price">S/10</span>
+                    </li>
+                    <li class="service-item" data-name="Netflix Premium" data-price="S/12" data-concept="Plan de mejor calidad y más estabilidad.">
+                        <span class="service-name">Netflix Premium</span> <span class="service-price">S/12</span>
+                    </li>
+                    <li class="service-item" data-name="Disney+ con ESPN" data-price="S/10" data-concept="Series + deportes en vivo.">
+                        <span class="service-name">Disney+ con ESPN</span> <span class="service-price">S/10</span>
+                    </li>
+                    <li class="service-item" data-name="Disney+ sin ESPN" data-price="S/9.5" data-concept="Solo contenido Disney, Marvel y Star Wars.">
+                        <span class="service-name">Disney+ sin ESPN</span> <span class="service-price">S/9.5</span>
+                    </li>
+                    <li class="service-item" data-name="Prime Video" data-price="S/9" data-concept="Catálogo exclusivo de Amazon.">
+                        <span class="service-name">Prime Video</span> <span class="service-price">S/9</span>
+                    </li>
+                    <li class="service-item" data-name="Paramount+" data-price="S/9" data-concept="Películas y series de Nickelodeon, MTV y más.">
+                        <span class="service-name">Paramount+</span> <span class="service-price">S/9</span>
+                    </li>
+                    <li class="service-item" data-name="Max (HBO)" data-price="S/9" data-concept="Todo el contenido de HBO y Warner Bros.">
+                        <span class="service-name">Max (HBO)</span> <span class="service-price">S/9</span>
+                    </li>
+                    <li class="service-item" data-name="Vix Plus" data-price="S/8" data-concept="Series latinas y novelas.">
+                        <span class="service-name">Vix Plus</span> <span class="service-price">S/8</span>
+                    </li>
+                    <li class="service-item" data-name="Crunchyroll" data-price="S/9" data-concept="Anime completo, subtitulado y doblado.">
+                        <span class="service-name">Crunchyroll</span> <span class="service-price">S/9</span>
+                    </li>
+                    <li class="service-item" data-name="Viki" data-price="S/9.5" data-concept="Dramas asiáticos subtitulados al español.">
+                        <span class="service-name">Viki</span> <span class="service-price">S/9.5</span>
+                    </li>
+                    <li class="service-item" data-name="PornHub" data-price="S/9" data-concept="Versión premium sin anuncios y con contenido exclusivo.">
+                        <span class="service-name">PornHub</span> <span class="service-price">S/9</span>
+                    </li>
+                    <li class="service-item" data-name="Kocowa" data-price="S/9" data-concept="Shows y dramas coreanos con licencia oficial.">
+                        <span class="service-name">Kocowa</span> <span class="service-price">S/9</span>
+                    </li>
+                </ul>
+            </section>
+
+            <!-- MÚSICA Y APPS Section -->
+            <section class="bg-gray-900 rounded-xl p-6 md:p-8 border border-blue-800 shadow-lg section-bg-pattern">
+                <h2 class="text-3xl md:text-4xl font-bold text-blue-400 mb-6 border-b-2 border-blue-700 pb-3 flex items-center">
+                    <span class="mr-3 text-4xl">🎧</span> MÚSICA Y APPS
+                </h2>
+                <ul class="divide-y divide-gray-800">
+                    <li class="service-item" data-name="YouTube Premium" data-price="S/9.5" data-concept="Reproduce sin anuncios y en segundo plano.">
+                        <span class="service-name">YouTube Premium</span> <span class="service-price">S/9.5</span>
+                    </li>
+                    <li class="service-item" data-name="Spotify Premium" data-price="S/13" data-concept="Escucha sin cortes, con descargas.">
+                        <span class="service-name">Spotify Premium</span> <span class="service-price">S/13</span>
+                    </li>
+                    <li class="service-item" data-name="Tidal" data-price="S/8" data-concept="Streaming de música en calidad Hi-Fi.">
+                        <span class="service-name">Tidal</span> <span class="service-price">S/8</span>
+                    </li>
+                    <li class="service-item" data-name="Apple Music" data-price="S/8" data-concept="Música con integración a iOS.">
+                        <span class="service-name">Apple Music</span> <span class="service-price">S/8</span>
+                    </li>
+                    <li class="service-item" data-name="Duolingo" data-price="S/9" data-concept="Aprende idiomas con lecciones avanzadas.">
+                        <span class="service-name">Duolingo</span> <span class="service-price">S/9</span>
+                    </li>
+                    <li class="service-item" data-name="Canva EDU" data-price="S/7" data-concept="Versión educativa de Canva con herramientas premium.">
+                        <span class="service-name">Canva EDU</span> <span class="service-price">S/7</span>
+                    </li>
+                    <li class="service-item" data-name="Scribd" data-price="S/9.5" data-concept="Libros, documentos y audiolibros ilimitados.">
+                        <span class="service-name">Scribd</span> <span class="service-price">S/9.5</span>
+                    </li>
+                    <li class="service-item" data-name="Deezer" data-price="S/9.5" data-concept="Música con recomendaciones inteligentes.">
+                        <span class="service-name">Deezer</span> <span class="service-price">S/9.5</span>
+                    </li>
+                </ul>
+            </section>
+
+            <!-- EXTRAS Section -->
+            <section class="bg-gray-900 rounded-xl p-6 md:p-8 border border-fuchsia-800 shadow-lg section-bg-pattern">
+                <h2 class="text-3xl md:text-4xl font-bold text-fuchsia-400 mb-6 border-b-2 border-fuchsia-700 pb-3 flex items-center">
+                    <span class="mr-3 text-4xl">🎁</span> EXTRAS
+                </h2>
+                <ul class="divide-y divide-gray-800">
+                    <li class="service-item" data-name="TikTok Monedas" data-price="Consultar" data-concept="Se usan para regalar en vivos o desbloquear funciones. Consulta por WhatsApp el precio actual.">
+                        <span class="service-name">TikTok Monedas</span> <span class="service-price">Consultar</span>
+                    </li>
+                </ul>
+            </section>
+        </main>
+
+        <!-- Footer Section -->
+        <footer class="text-center mt-16 pb-20">
+            <div class="bg-gray-900 rounded-xl p-6 md:p-8 border border-blue-800 shadow-lg section-bg-pattern mb-8">
+                <h3 class="text-2xl md:text-3xl font-bold text-white neon-blue-glow mb-4">Contáctanos</h3>
+                <p class="text-lg md:text-xl mb-4">
+                    📲 <a href="https://wa.me/+51974530640" target="_blank" class="text-blue-400 hover:underline font-bold">WhatsApp directo: wa.me/+51974530640</a>
+                </p>
+                <p class="text-lg md:text-xl mb-4 text-gray-300">
+                    💳 Métodos de pago: <span class="text-fuchsia-400 font-semibold">Yape</span> y <span class="text-fuchsia-400 font-semibold">BCP</span>
+                </p>
+                <p class="text-lg md:text-xl text-gray-400">
+                    Solo para Perú 🇵🇪 – <span class="text-green-400 font-semibold">Entrega inmediata tras el pago</span>
+                </p>
+            </div>
+            <p class="text-3xl md:text-4xl font-extrabold text-white neon-gold-glow mt-8">IAxGO</p>
+        </footer>
+    </div>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/+51974530640" target="_blank" class="fixed bottom-4 right-4 md:bottom-8 md:right-8 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg z-50 transform transition-transform duration-300 hover:scale-110 focus:outline-none focus:ring-4 focus:ring-green-400 focus:ring-opacity-75">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-whatsapp" viewBox="0 0 16 16">
+            <path d="M13.67 2.33A7.95 7.95 0 0 0 8 0C3.58 0 0 3.58 0 8a7.95 7.95 0 0 0 2.33 5.67L0 16l2.33-2.33A7.95 7.95 0 0 0 8 16c4.42 0 8-3.58 8-8s-3.58-8-8-8zM8 14.5c-1.85 0-3.5-.76-4.71-1.99L2 14l1.49-1.49c-1.23-1.21-1.99-2.86-1.99-4.71 0-3.6 2.9-6.5 6.5-6.5S14.5 4.4 14.5 8s-2.9 6.5-6.5 6.5zM11.5 8.25c-.24 0-.44-.08-.61-.24-.17-.16-.25-.36-.25-.61s.08-.44.24-.61c.16-.17.36-.25.61-.25s.44.08.61.24c.17.16.25.36.25.61s-.08.44-.24.61c-.16.17-.36.25-.61.25zM8 8.25c-.24 0-.44-.08-.61-.24-.17-.16-.25-.36-.25-.61s.08-.44.24-.61c.16-.17.36-.25.61-.25s.44.08.61.24c.17.16.25.36.25.61s-.08.44-.24.61c-.16.17-.36.25-.61.25zM4.5 8.25c-.24 0-.44-.08-.61-.24-.17-.16-.25-.36-.25-.61s.08-.44.24-.61c.16-.17.36-.25.61-.25s.44.08.61.24c.17.16.25.36.25.61s-.08.44-.24.61c-.16.17-.36.25-.61.25z"/>
+        </svg>
+    </a>
+
+    <!-- Concept Display Card (Hidden by default) -->
+    <div id="concept-display-card">
+        <button class="close-btn" onclick="document.getElementById('concept-display-card').classList.remove('active');">&times;</button>
+        <h4 id="concept-title" class="text-xl md:text-2xl font-bold text-white mb-2 neon-blue-glow"></h4>
+        <p id="concept-price" class="text-lg md:text-xl font-semibold text-amber-400 mb-3"></p>
+        <p id="concept-description" class="text-base md:text-lg text-gray-300 leading-relaxed"></p>
+    </div>
+
+    <script>
+        // Get all service items
+        const serviceItems = document.querySelectorAll('.service-item');
+        const conceptDisplayCard = document.getElementById('concept-display-card');
+        const conceptTitle = document.getElementById('concept-title');
+        const conceptPrice = document.getElementById('concept-price');
+        const conceptDescription = document.getElementById('concept-description');
+
+        // Add click event listener to each service item
+        serviceItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const name = item.dataset.name;
+                const price = item.dataset.price;
+                const concept = item.dataset.concept;
+
+                // Populate the concept card
+                conceptTitle.textContent = name;
+                conceptPrice.textContent = price !== 'Consultar' ? `Precio: ${price}` : `Precio: ${price}`;
+                conceptDescription.textContent = concept;
+
+                // Show the concept card
+                conceptDisplayCard.classList.add('active');
+            });
+        });
+
+        // Close the concept card if clicked outside (optional, but good UX)
+        // document.addEventListener('click', (event) => {
+        //     if (!conceptDisplayCard.contains(event.target) && !event.target.closest('.service-item')) {
+        //         conceptDisplayCard.classList.remove('active');
+        //     }
+        // });
+    </script>
+</body>
+</html>
+
